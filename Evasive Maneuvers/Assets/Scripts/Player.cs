@@ -2,12 +2,21 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+// See GameManager for explanations on MonoBehaviour.
+public class Player : MonoBehaviour
+{
     //Player Member Variables
     
     //Public
 
-    /*[Range(float x, float y)] restricts the possible values that the following (and only) variable can be set in the Unity inspector on the right side */
+    /* The brackets used within MonoBehaviour are for customization of the Unity inspector,
+     * which is found at the right of the Unity Editor, in scene when you select a GameObject.
+     * You don't have to worry about that and it doesn't affect the actual game code at all!
+     * They have to be right above of the variables they affect-- yes, you guessed it right,
+     * your own custom variables can show up in Unity's inspector, when declared public,
+     * and their types are strings, ints, or other acceptable types (more on that later).
+     * For example, [Range(float x, float y)] restricts the possible values that the following
+     * (and only) variable can be set in the Unity inspector on the right side. */
     [Range(0.0f, 1.0f)]
     public float moveSpeed;
 
@@ -21,30 +30,33 @@ public class Player : MonoBehaviour {
     //last time since a player has fired. this will be set later in playerAttack function
     private float timeSinceFiring=0.0f;
     
-    //gets the GameManager object to handle game related stuff. 
+    //gets the reference to the GameManager object to handle game related stuff. 
     //for now, it's just projectile management. 
     private GameManager gameManager;
 
-    
+
+    // See GameManager for explanations on this method.
     void Awake()
     {
-        /*Finds the Game Manager object in the scene and saves the GameManager component to the private variable
-          Currently as of 1/23/2016, GameManager is what handles firing projectiles. 
+        /*Finds the Game Manager object in the scene and saves the GameManager component to the private variable.
+         * Avoid using GameObject.Find() too much, because it loops through every object in the scene,
+         * searching for the object by exact name. If you misspelled something or changed a name,
+         * it will give you trouble. Also if you have a lot of objects... */
+
+        /* Currently as of 1/23/2016, GameManager is what handles firing projectiles. 
           Will probably change for other things as time goes on*/
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     
-    // Use this for initialization
-	void Start () {
-
+    // See GameManager for explanations on this method.
+	void Start()
+    {
 
 	}
 
 
-
-	
-	// Update is called once per frame
-	void Update () 
+    // See GameManager for explanations on this method.
+	void Update() 
     {
         //check for playerMovement input
         playerMovement();

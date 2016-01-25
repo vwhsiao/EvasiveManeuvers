@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
-
+/* MonoBehaviour basically means it inherits from Unity's special class (GameObject)
+ * with it you can access functions and variables within Unity's scenes, and all GameObjects inside it.
+ * Nobody really knows what it is, and we don't have to know :) */
+public class GameManager : MonoBehaviour
+{
     //public variables
     public GameObject projectile;
     public int bulletBillMoveSpeed;
@@ -10,18 +13,26 @@ public class GameManager : MonoBehaviour {
     //private variables
     private GameObject player;
     private Vector2 direction; 
+
+    // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
         player = GameObject.Find("Player");
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization, it happens after Awake()
+	void Start()
+    {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+    /* Update is called once per frame,
+     * there are different kinds of Update functions (within the MonoBehaviour class),
+     * such as FixedUpdate() for physics calculations, and LateUpdate() after everything's done.
+     * For now, we can just stick with Update(), and change our needs as we go.
+     * Be careful, Update() is called often, so it slows down the game with too much in there. */
+	void Update()
+    {
 	
 	}
 
