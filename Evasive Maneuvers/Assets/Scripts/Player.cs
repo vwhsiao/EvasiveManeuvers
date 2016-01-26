@@ -25,6 +25,13 @@ public class Player : MonoBehaviour
     [Range(0.0f, 2.0f)]
     public float fireSpeed;
     
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.tag == "enemy") {
+			Destroy (coll.gameObject);
+			Destroy (this.gameObject);
+		}
+	}
     
     //Private
     //last time since a player has fired. this will be set later in playerAttack function
