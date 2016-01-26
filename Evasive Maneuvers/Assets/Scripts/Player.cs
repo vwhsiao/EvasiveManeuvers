@@ -25,11 +25,14 @@ public class Player : MonoBehaviour
     [Range(0.0f, 2.0f)]
     public float fireSpeed;
     
-
+	public int health = 2;
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.tag == "enemy") {
 			Destroy (coll.gameObject);
-			Destroy (this.gameObject);
+			if (health == 0) {
+				Destroy (this.gameObject);
+			}
+			health--;
 		}
 	}
     
