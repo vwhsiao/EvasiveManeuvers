@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /* MonoBehaviour basically means it inherits from Unity's special class (GameObject)
@@ -12,12 +13,29 @@ public class GameManager : MonoBehaviour
 
     //private variables
     private GameObject player;
-    private Vector2 direction; 
+    private Vector2 direction;
+    private RectTransform canvas;
+    private Image healthBar, backBar;
+    float xbar;
+
 
     // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
         player = GameObject.Find("Player");
+
+        canvas = GameObject.Find("UI").GetComponent<RectTransform>();
+
+        GameObject healthFront = new GameObject("healthBar");
+        healthBar = healthFront.AddComponent<Image>();
+        healthBar.rectTransform.SetParent(canvas.transform, false);
+        healthBar.color = Color.red;
+
+        GameObject healthBack = new GameObject("healthBarBack");
+        backBar = healthBack.AddComponent<Image>();
+        backBar.rectTransform.SetParent(canvas.transform, false);
+        backBar.color = new Color(0.0f, 0.0f, 0.0f);
+
     }
 
     // Use this for initialization, it happens after Awake()
@@ -33,7 +51,7 @@ public class GameManager : MonoBehaviour
      * Be careful, Update() is called often, so it slows down the game with too much in there. */
 	void Update()
     {
-	
+        updateHealth();
 	}
 
     public void FireProjectile()
@@ -64,5 +82,29 @@ public class GameManager : MonoBehaviour
         //logistical thing, set the parent of the object to the GameManager so we do'nt flood the hierarchy screen
         firedProjectile.transform.parent = transform;
         
+    }
+
+    public void setHealthBar(bool visible)
+    {
+        healthBar.gameObject.SetActive(visible);
+        backBar.gameObject.SetActive(visible);
+    }
+
+
+    private void updateHealth()
+    {
+
+        float targetX = player.GetComponent<Player>().returnHealthPercent();
+        xbar = Mathf.Lerp(xbar, targetX, Time.deltaTime * 2.0f);
+
+        healthBar.rectTransform.offsetMin = Vector2.zero;
+        healthBar.rectTransform.offsetMax = Vector2.zero;
+        healthBar.rectTransform.anchorMin = new Vector2(0.0f, 0.0f);
+        healthBar.rectTransform.anchorMax = new Vector2(xbar, 0.05f);
+
+        backBar.rectTransform.offsetMin = Vector2.zero;
+        backBar.rectTransform.offsetMax = Vector2.zero;
+        backBar.rectTransform.anchorMin = new Vector2(xbar, 0.0f);
+        backBar.rectTransform.anchorMax = new Vector2(1.0f, 0.05f);
     }
 }
