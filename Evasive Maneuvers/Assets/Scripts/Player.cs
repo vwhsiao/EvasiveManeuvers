@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     [Range(0.0f, 2.0f)]
     public float fireSpeed;
     
+	private int health = 2;
+    private int maxHealth = 2;
+
     
     //Private
     //last time since a player has fired. this will be set later in playerAttack function
@@ -64,6 +67,20 @@ public class Player : MonoBehaviour
         //check for playerAttack input
         playerAttack();
 	}
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "enemy")
+        {
+            Destroy(coll.gameObject);
+            if (health == 0)
+            {
+                Destroy(this.gameObject);
+            }
+            health--;
+        }
+        Debug.Log(health);
+    }
 
     //handles player attacks. title yo.
     void playerAttack()
@@ -108,5 +125,10 @@ public class Player : MonoBehaviour
 
         //change the position of the Player object by calling the transform position of this game object and adding the direction
         transform.position += (dir);
+    }
+
+    public float returnHealthPercent()
+    {
+        return health / maxHealth;
     }
 }
