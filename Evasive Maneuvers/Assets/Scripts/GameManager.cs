@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 /* MonoBehaviour basically means it inherits from Unity's special class (GameObject)
  * with it you can access functions and variables within Unity's scenes, and all GameObjects inside it.
- * Nobody really knows what it is, and we don't have to know :) */
+ * Nobody really knows what it is, and we don't have to know :) 
+        
+    */
 public class GameManager : MonoBehaviour
 {
+
     //public variables
     public GameObject projectile;
+    public GameObject formation;
+
     public int bulletBillMoveSpeed;
 
     //private variables
@@ -23,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization, it happens after Awake()
 	void Start()
     {
-	
+	    
 	}
 	
     /* Update is called once per frame,
@@ -33,8 +39,8 @@ public class GameManager : MonoBehaviour
      * Be careful, Update() is called often, so it slows down the game with too much in there. */
 	void Update()
     {
-	
-	}
+
+    }
 
     public void FireProjectile()
     {
@@ -45,7 +51,7 @@ public class GameManager : MonoBehaviour
         //Gets the rotation for the object (projectile) to point at
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
         
-        //Create the object as a GameObject so we can still change values of it
+        //Create the object as a GameObject so we can still change values of it  Quarternion.identity
         GameObject firedProjectile = Instantiate(projectile, player.transform.position, rotation ) as GameObject;
         
         //Get the vector of the direction projectil is going to go in

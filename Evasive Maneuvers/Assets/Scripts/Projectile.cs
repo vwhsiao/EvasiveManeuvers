@@ -19,6 +19,8 @@ public class Projectile : MonoBehaviour
     {
 	   
 	}
+    
+    
 
     //Destroys this object after a set time so we do'nt use up a ton of processing power
     //Unity still renders and calculates collisions for things that aren't on screen, 
