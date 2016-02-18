@@ -67,6 +67,10 @@ public class enemyTest : MonoBehaviour {
 			Destroy (coll.gameObject);
 			Destroy (this.gameObject);
 		}
+        else
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), coll.collider);
+        }
 	}
 	
 }

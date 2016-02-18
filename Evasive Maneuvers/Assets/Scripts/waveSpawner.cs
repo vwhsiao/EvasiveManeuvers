@@ -136,22 +136,21 @@ public class waveSpawner : MonoBehaviour
     {
  
         Transform _sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length-1)].GetComponent<Transform>();
-        GameObject formation = Instantiate(GameObject.Find("Enemy"), Vector3.zero, Quaternion.identity) as GameObject;
-        Debug.Log(formation);
-        float locationX = _sp.position.x;
-        GameObject[] listOfDestinations = new GameObject[RandomSpawnPoints.Length - 1];
-        for (int i = 0; i< RandomSpawnPoints.Length-1; i++)
-        {
-            if (RandomSpawnPoints[i].GetComponent<Transform>().position.x != locationX)
-            {
-                listOfDestinations[i] = RandomSpawnPoints[i];
-            }
-        }
-        
-        int rng = UnityEngine.Random.Range(0, listOfDestinations.Length-1);
-        Debug.Log(rng);
+        GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
+        formation.GetComponent<enemyTest>().SetDirection(transform);
         //Debug.Log(formation);
-        Debug.Log(listOfDestinations);
-        formation.GetComponent<enemyTest>().SetDirection(listOfDestinations[rng].GetComponent<Transform>());
+        //float locationX = _sp.position.x;
+        //GameObject[] listOfDestinations = new GameObject[RandomSpawnPoints.Length - 1];
+        //for (int i = 0; i< RandomSpawnPoints.Length-1; i++)
+        //{
+        //    if (RandomSpawnPoints[i].GetComponent<Transform>().position.x != locationX)
+        //    {
+        //        listOfDestinations[i] = RandomSpawnPoints[i];
+        //    }
+        //}
+        
+//        int rng = UnityEngine.Random.Range(0, 3);
+
+        //formation.GetComponent<enemyTest>().SetDirection(listOfDestinations[rng].GetComponent<Transform>());
     }
 }
