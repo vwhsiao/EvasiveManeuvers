@@ -137,7 +137,7 @@ public class waveSpawner : MonoBehaviour
  
         Transform _sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length-1)].GetComponent<Transform>();
         GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
-        formation.GetComponent<enemyTest>().SetDirection(transform);
+        formation.GetComponent<enemyTest>().SetDirection();
         //Debug.Log(formation);
         //float locationX = _sp.position.x;
         //GameObject[] listOfDestinations = new GameObject[RandomSpawnPoints.Length - 1];

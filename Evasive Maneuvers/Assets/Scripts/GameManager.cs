@@ -8,7 +8,8 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     //public variables
-    public GameObject projectile;
+    public GameObject snowBall;
+    public GameObject icicle;
     public int bulletBillMoveSpeed;
 
     //private variables
@@ -58,30 +59,46 @@ public class GameManager : MonoBehaviour
     {
         //find mouse position and translate that into a Vector with 3 floats (x,y,z)
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+
         //Quaternion is just a fancy thing to say a Vector with a direction. 
         //Gets the rotation for the object (projectile) to point at
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
-        
+
         //Create the object as a GameObject so we can still change values of it
-        GameObject firedProjectile = Instantiate(projectile, player.transform.position, rotation ) as GameObject;
+        if (player.GetComponent<Player>().canFireSnowball)
+        {
+            GameObject firedProjectile = Instantiate(snowBall, player.transform.position, rotation) as GameObject;
+            moveProjectile(firedProjectile, mousePos);
+        }
+        if (player.GetComponent<Player>().canFireIcicle)
+        {
+            GameObject firedProjectile = Instantiate(icicle, player.transform.position, rotation) as GameObject;
+            moveProjectile(firedProjectile, mousePos);
+        }
+        
+
+        
+    }
+
+    void moveProjectile(GameObject projectile, Vector3 mousePos)
+    {
+
         
         //Get the vector of the direction projectil is going to go in
-		direction = mousePos - player.transform.position;
+        direction = mousePos - player.transform.position;
 
         //Normalize it (make it into units of 1's)
-		direction.Normalize();
+        direction.Normalize();
 
         //Move the projectile in front of the player object so it doesn't just create it on top of the player
         //trust me, it looks wonky as hell. if you do'nt believe me, get rid of the *2's in the next line and then try it
-        firedProjectile.transform.position += new Vector3 (direction.x*2, direction.y*2, 0);
+        projectile.transform.position += new Vector3(direction.x * 2, direction.y * 2, 0);
 
         //increase the projectile velocity so it actually, you know, projectiles
-        firedProjectile.GetComponent<Rigidbody2D>().velocity = direction * bulletBillMoveSpeed;
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * bulletBillMoveSpeed;
 
         //logistical thing, set the parent of the object to the GameManager so we do'nt flood the hierarchy screen
-        firedProjectile.transform.parent = transform;
-        
+        projectile.transform.parent = transform;
     }
 
     //public void setHealthBar(bool visible)

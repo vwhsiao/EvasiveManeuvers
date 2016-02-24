@@ -50,7 +50,7 @@ public class enemyTest : MonoBehaviour {
 	
 	}
     
-    public void SetDirection(Transform destination)
+    public void SetDirection()
     {
         direction = player.transform.position - transform.position;
         direction.Normalize();
@@ -62,14 +62,20 @@ public class enemyTest : MonoBehaviour {
         
     }
 
-	void OnCollisionEnter2D(Collision2D coll) {
+	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "playerProjectile") {
-			Destroy (coll.gameObject);
-			Destroy (this.gameObject);
+            Destroy(this.gameObject);
+			
+            if (!coll.gameObject.name.Contains("Icicle"))
+            {
+                Destroy(coll.gameObject);
+            }
+			
+            
 		}
         else
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), coll.collider);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), coll.GetComponent<Collider2D>());
         }
 	}
 	
