@@ -24,20 +24,23 @@ public class Player : MonoBehaviour
     //how many shots the player can fire per second. lower number = higher fire rate
     [Range(0.0f, 2.0f)]
     public float fireSpeed;
-    
-	private int health = 2;
-    private int maxHealth = 2;
+    public bool canFireSnowball = false;
+    public bool canFireIcicle = false;
+
+	
 
     
     //Private
     //last time since a player has fired. this will be set later in playerAttack function
     private float timeSinceFiring=0.0f;
-    
+    private int health = 2;
+    private int maxHealth = 2;
     //gets the reference to the GameManager object to handle game related stuff. 
     //for now, it's just projectile management. 
     private GameManager gameManager;
-
-
+    
+    private float snowBallTimeLeft = 15.0f;
+    private float icicleTimeLeft = 15.0f;
     // See GameManager for explanations on this method.
     void Awake()
     {
@@ -61,6 +64,19 @@ public class Player : MonoBehaviour
     // See GameManager for explanations on this method.
 	void Update() 
     {
+        if (canFireIcicle || canFireSnowball)
+        {
+            if (icicleTimeLeft>0.0f || snowBallTimeLeft >0.0f)
+            {
+                icicleTimeLeft -= Time.deltaTime;
+                snowBallTimeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                canFireSnowball = false;
+                canFireIcicle = false;
+            }
+        }
         //check for playerMovement input
         playerMovement();
 
@@ -68,18 +84,18 @@ public class Player : MonoBehaviour
         playerAttack();
 	}
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "enemy")
         {
             Destroy(coll.gameObject);
             if (health == 0)
             {
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
             health--;
         }
-        Debug.Log(health);
+        //Debug.Log(health);
     }
 
     //handles player attacks. title yo.
@@ -130,5 +146,26 @@ public class Player : MonoBehaviour
     public float returnHealthPercent()
     {
         return health / maxHealth;
+    }
+
+    public void setFireSnowball()
+    {
+        if (canFireIcicle)
+        {
+            return;
+        }
+        canFireSnowball = true;
+        snowBallTimeLeft = 15.0f;
+    }
+
+    public void setFireIcicle()
+    {
+        canFireIcicle = true;
+        icicleTimeLeft = 15.0f;
+        if (canFireSnowball)
+        {
+            canFireSnowball = false;
+        }
+
     }
 }
