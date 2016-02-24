@@ -140,7 +140,19 @@ public class Player : MonoBehaviour
         dir *= moveSpeed;
 
         //change the position of the Player object by calling the transform position of this game object and adding the direction
+        //Vector3 testPos = transform.position + dir;
+        //if ((testPos.x<-26)||(testPos.x>26) || (testPos.y>15) || (testPos.y<-15))
+        //{
+        //    return;
+        //}
         transform.position += (dir);
+        
+        //keep player in camera view
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        pos.x = Mathf.Clamp(pos.x, 0.01f, 0.99f);
+        pos.y = Mathf.Clamp(pos.y, 0.01f, 0.99f);
+        transform.position = Camera.main.ViewportToWorldPoint(pos);
+        
     }
 
     public float returnHealthPercent()
