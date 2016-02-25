@@ -6,7 +6,8 @@ public class enemyTest : MonoBehaviour {
 	//private GameManager gameManager;
     private GameObject player;
     public float speed = 5.0f; // move speed
-
+    private Vector3 direction;
+    private bool isFormation = false; 
     void Awake()
     {
         //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,18 +34,49 @@ public class enemyTest : MonoBehaviour {
 
 
        // Quaternion rotation = Quaternion.LookRotation(Vector3.forward, transform.position - player.transform.position);
-        Vector3 direction = player.transform.position - transform.position;
-        direction.Normalize();
-        transform.Translate(speed * direction);
-        
+
+
+
+        if (isFormation)
+        {
+            move();
+        }
+        else
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            direction.Normalize();
+            transform.Translate(speed * direction);
+        }
 	
 	}
+    
+    public void SetDirection()
+    {
+        direction = player.transform.position - transform.position;
+        direction.Normalize();
+        isFormation = true;
+    }
+    void move()
+    {
+        transform.Translate(speed * direction);
+        
+    }
 
-	void OnCollisionEnter2D(Collision2D coll) {
+	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "playerProjectile") {
-			Destroy (coll.gameObject);
-			Destroy (this);
+            Destroy(this.gameObject);
+			
+            if (!coll.gameObject.name.Contains("Icicle"))
+            {
+                Destroy(coll.gameObject);
+            }
+			
+            
 		}
+        else
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), coll.GetComponent<Collider2D>());
+        }
 	}
 	
 }

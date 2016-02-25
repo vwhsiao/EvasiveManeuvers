@@ -5,7 +5,7 @@ using System;
 
 public class waveSpawner : MonoBehaviour
 {
-    private GameObject projectile;
+   // private GameObject Enemy;
     private GameManager gameManager;
 
     public enum SpawnState { SPAWNING, WAITING, COUNTING };
@@ -14,12 +14,12 @@ public class waveSpawner : MonoBehaviour
     public class Wave
     {
         public string name;
-        public Transform Projectile;
+        public GameObject Projectile;
         public int count;
         public float rate;
 
     }
-    public Transform[] RandomSpawnPoints;
+    public GameObject[] RandomSpawnPoints;
     public Wave[] waves;
     private int nextWave = 0;
 
@@ -44,6 +44,7 @@ public class waveSpawner : MonoBehaviour
 
     void Start()
     {
+       RandomSpawnPoints =  GameObject.FindGameObjectsWithTag("Respawn");
         waveCountDown = timeBetweenWaves;
 
     }
@@ -131,10 +132,25 @@ public class waveSpawner : MonoBehaviour
 
         yield break;
     }
-    void SpawnEnemy(Transform _Projectile)
+    void SpawnEnemy(GameObject _Projectile)
     {
  
-        Transform _sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length)];
-        Instantiate(_Projectile, _sp.position, _sp.rotation);
+        Transform _sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length-1)].GetComponent<Transform>();
+        GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
+        formation.GetComponent<enemyTest>().SetDirection();
+        //Debug.Log(formation);
+        //float locationX = _sp.position.x;
+        //GameObject[] listOfDestinations = new GameObject[RandomSpawnPoints.Length - 1];
+        //for (int i = 0; i< RandomSpawnPoints.Length-1; i++)
+        //{
+        //    if (RandomSpawnPoints[i].GetComponent<Transform>().position.x != locationX)
+        //    {
+        //        listOfDestinations[i] = RandomSpawnPoints[i];
+        //    }
+        //}
+        
+//        int rng = UnityEngine.Random.Range(0, 3);
+
+        //formation.GetComponent<enemyTest>().SetDirection(listOfDestinations[rng].GetComponent<Transform>());
     }
 }
