@@ -46,6 +46,7 @@ public class PowerUp : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
+ 
     }
 
     public IEnumerator SpeedUpBoost()

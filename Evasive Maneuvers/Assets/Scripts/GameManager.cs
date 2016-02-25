@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     //public variables
     public GameObject snowBall;
     public GameObject icicle;
+    public GameObject SnowBallPowerUp;
+    public GameObject IciclePowerUp;
+
     public int bulletBillMoveSpeed;
 
     //private variables
@@ -78,6 +81,11 @@ public class GameManager : MonoBehaviour
         
 
         
+    }
+
+    void createPowerUp()
+    {
+
     }
 
     void moveProjectile(GameObject projectile, Vector3 mousePos)

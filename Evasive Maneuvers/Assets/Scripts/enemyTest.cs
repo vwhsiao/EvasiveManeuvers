@@ -12,6 +12,7 @@ public class enemyTest : MonoBehaviour {
     {
         //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
+        Invoke("kill", 5.0f);
     }
 
 	// Use this for initialization
@@ -19,7 +20,10 @@ public class enemyTest : MonoBehaviour {
 	
 	}
 		
-	
+	void kill()
+    {
+        Destroy(this.gameObject);
+    }
 	// Update is called once per frame
 
 
