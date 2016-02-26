@@ -39,7 +39,7 @@ public class enemyTest : MonoBehaviour {
 
        // Quaternion rotation = Quaternion.LookRotation(Vector3.forward, transform.position - player.transform.position);
 
-
+        return;
 
         if (isFormation)
         {

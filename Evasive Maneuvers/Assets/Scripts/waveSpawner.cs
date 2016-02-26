@@ -8,6 +8,8 @@ public class waveSpawner : MonoBehaviour
    // private GameObject Enemy;
     private GameManager gameManager;
 
+    public GameObject[] formations;
+
     public enum SpawnState { SPAWNING, WAITING, COUNTING };
 
     [System.Serializable]
@@ -134,7 +136,9 @@ public class waveSpawner : MonoBehaviour
     }
     void SpawnEnemy(GameObject _Projectile)
     {
- 
+        SpawnFormation(_Projectile);
+        return;
+
         Transform _sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length-1)].GetComponent<Transform>();
         GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
         formation.GetComponent<enemyTest>().SetDirection();
@@ -152,5 +156,14 @@ public class waveSpawner : MonoBehaviour
 //        int rng = UnityEngine.Random.Range(0, 3);
 
         //formation.GetComponent<enemyTest>().SetDirection(listOfDestinations[rng].GetComponent<Transform>());
+    }
+
+    void SpawnFormation(GameObject _Projectile)
+    {
+        // I suck at random so I'm just going to always select the first one lol
+        GameObject chosen = formations[0];
+        Transform sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length-1)].GetComponent<Transform>();
+        GameObject formation = Instantiate(chosen, sp.position, Quaternion.identity) as GameObject;
+        formation.AddComponent<EnemyGroup>();
     }
 }

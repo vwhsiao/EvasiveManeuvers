@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyGroup : MonoBehaviour {
     private GameObject player;
     private Vector3 direction;
-    public float speed = 5.0f; // move speed
+    public float speed = 0.08f; // move speed
 
 	// Use this for initialization
 	void Start () {
