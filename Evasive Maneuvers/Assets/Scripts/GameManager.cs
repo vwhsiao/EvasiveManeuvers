@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /* MonoBehaviour basically means it inherits from Unity's special class (GameObject)
  * with it you can access functions and variables within Unity's scenes, and all GameObjects inside it.
@@ -13,11 +14,20 @@ public class GameManager : MonoBehaviour
     public GameObject SnowBallPowerUp;
     public GameObject IciclePowerUp;
 
+    public GameObject StatsUI;
     public int bulletBillMoveSpeed;
+    
+    public int enemiesKilledCount;
+    public int enemiesDodgedCount;
+
+    public float icicleSpeed;
+    public float snowballSpeed;
 
     //private variables
     private GameObject player;
     private Vector2 direction;
+
+    private Text enemiesDodgedCountText, enemiesKilledCountText;
     //private RectTransform canvas;
     //private Image healthBar, backBar;
     //float xbar;
@@ -26,8 +36,13 @@ public class GameManager : MonoBehaviour
     // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
-        player = GameObject.Find("Player");
 
+        player = GameObject.Find("Player");
+        enemiesDodgedCount = 0;
+        enemiesKilledCount = 0;
+        enemiesDodgedCountText = GameObject.Find("enemiesDodgedCount").GetComponent<Text>();
+        enemiesKilledCountText = GameObject.Find("enemiesKilledCount").GetComponent<Text>();
+        StatsUI.SetActive(false);
         //canvas = GameObject.Find("UI").GetComponent<RectTransform>();
 
         //GameObject healthFront = new GameObject("healthBar");
@@ -45,7 +60,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization, it happens after Awake()
 	void Start()
     {
-	
+
 	}
 	
     /* Update is called once per frame,
@@ -55,7 +70,15 @@ public class GameManager : MonoBehaviour
      * Be careful, Update() is called often, so it slows down the game with too much in there. */
 	void Update()
     {
-        //updateHealth();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            StatsUI.SetActive(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            StatsUI.SetActive(false);
+        }
 	}
 
     public void FireProjectile()
@@ -68,25 +91,46 @@ public class GameManager : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
 
         //Create the object as a GameObject so we can still change values of it
-        if (player.GetComponent<Player>().canFireSnowball)
-        {
-            GameObject firedProjectile = Instantiate(snowBall, player.transform.position, rotation) as GameObject;
-            moveProjectile(firedProjectile, mousePos);
-        }
         if (player.GetComponent<Player>().canFireIcicle)
         {
             GameObject firedProjectile = Instantiate(icicle, player.transform.position, rotation) as GameObject;
             moveProjectile(firedProjectile, mousePos);
         }
-        
 
-        
     }
 
-    void createPowerUp()
+    void SetStats()
     {
-
+        enemiesDodgedCountText.text = enemiesDodgedCount.ToString();
+        enemiesKilledCountText.text = enemiesKilledCount.ToString();
     }
+
+    public void IncrementEnemiesDodgedCount(int num)
+    {
+        enemiesDodgedCount+=num;
+        SetStats();
+    }
+    public void IncrementEnemiesKilledCount(int num)
+    {
+        enemiesKilledCount+=num;
+        SetStats();
+    }
+
+    public void FireSnowbomb()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
+        if (player.GetComponent<Player>().canFireSnowball)
+        {
+            GameObject firedProjectile = Instantiate(snowBall, player.transform.position, rotation) as GameObject;
+            firedProjectile.GetComponent<Projectile>().destination = mousePos;
+            firedProjectile.GetComponent<Projectile>().speed = snowballSpeed;
+            firedProjectile.GetComponent<CircleCollider2D>().enabled = false;
+        }
+    }
+
+
 
     void moveProjectile(GameObject projectile, Vector3 mousePos)
     {
@@ -103,7 +147,7 @@ public class GameManager : MonoBehaviour
         projectile.transform.position += new Vector3(direction.x * 2, direction.y * 2, 0);
 
         //increase the projectile velocity so it actually, you know, projectiles
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * bulletBillMoveSpeed;
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * icicleSpeed;
 
         //logistical thing, set the parent of the object to the GameManager so we do'nt flood the hierarchy screen
         projectile.transform.parent = transform;
@@ -132,4 +176,9 @@ public class GameManager : MonoBehaviour
     //    backBar.rectTransform.anchorMin = new Vector2(xbar, 0.0f);
     //    backBar.rectTransform.anchorMax = new Vector2(1.0f, 0.05f);
     //}
+
+    public void Death()
+    {
+        SceneManager.LoadScene("stats_screen");
+    }
 }

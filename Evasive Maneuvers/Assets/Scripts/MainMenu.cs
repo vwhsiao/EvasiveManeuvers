@@ -6,6 +6,7 @@ using Image = UnityEngine.UI.Image;
 public class MainMenu : MonoBehaviour
 {
     public GameObject tutorial;
+    public GameObject credits;
     private bool actionLocked = false;
 
 	// Use this for initialization
@@ -27,36 +28,46 @@ public class MainMenu : MonoBehaviour
 
     public void ShowTutorial()
     {
-        StartCoroutine(TutorialCoroutine(0.05f, 1, true));
+        StartCoroutine(ImageCoroutine(tutorial, 0.05f, 1, true));
     }
 
     public void HideTutorial()
     {
-        StartCoroutine(TutorialCoroutine(-0.05f, 0, false));
+        StartCoroutine(ImageCoroutine(tutorial, -0.05f, 0, false));
     }
 
-    IEnumerator TutorialCoroutine(float delta, int destination, bool active)
+    public void ShowCredits()
+    {
+        StartCoroutine(ImageCoroutine(credits, 0.05f, 1, true));
+    }
+    
+    public void HideCredits()
+    {
+        StartCoroutine(ImageCoroutine(credits, -0.05f, 0, false));
+    }
+
+    IEnumerator ImageCoroutine(GameObject image, float delta, int destination, bool active)
     {
         if (actionLocked) { yield break; }
         else { actionLocked = true; }
 
-        tutorial.SetActive(true);
-        Color color = tutorial.GetComponent<Image>().color;
+        image.SetActive(true);
+        Color color = image.GetComponent<Image>().color;
         while (true)
         {
-            if ((delta < 0 && tutorial.GetComponent<Image>().color.a <= destination) ||
-                (delta > 0 && tutorial.GetComponent<Image>().color.a >= destination))
+            if ((delta < 0 && image.GetComponent<Image>().color.a <= destination) ||
+                (delta > 0 && image.GetComponent<Image>().color.a >= destination))
                 break;
 
             color.a += delta;
-            tutorial.GetComponent<Image>().color = color;
+            image.GetComponent<Image>().color = color;
 
-            color = tutorial.GetComponent<Image>().color;
+            color = image.GetComponent<Image>().color;
             yield return null;
         }
         color.a = destination;
-        tutorial.GetComponent<Image>().color = color;
-        tutorial.SetActive(active);
+        image.GetComponent<Image>().color = color;
+        image.SetActive(active);
 
         actionLocked = false;
         yield break;

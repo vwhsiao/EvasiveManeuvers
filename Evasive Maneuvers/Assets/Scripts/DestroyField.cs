@@ -3,14 +3,18 @@ using System.Collections;
 
 public class DestroyField : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D c)
+
+    void Start()
     {
-        Debug.Log ("Destory!");
+
+    }
+    void OnTriggerEnter2D(Collider2D c)
+    {
         switch (c.gameObject.tag)
         {
         case "playerProjectile":
-        case "enemy":
         case "Enemy":
+        case "EnemyGroup":
             Destroy(c.gameObject);
             break;
         }
