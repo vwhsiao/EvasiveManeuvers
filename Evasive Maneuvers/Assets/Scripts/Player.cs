@@ -6,7 +6,7 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     //Player Member Variables
-    
+    Animator anim;
     //Public
 
     /* The brackets used within MonoBehaviour are for customization of the Unity inspector,
@@ -19,7 +19,8 @@ public class Player : MonoBehaviour
      * (and only) variable can be set in the Unity inspector on the right side. */
     [Range(0.0f, 1.0f)]
     public float moveSpeed;
-
+    public float dir;
+    
 
     //how many shots the player can fire per second. lower number = higher fire rate
     [Range(0.0f, 2.0f)]
@@ -52,18 +53,21 @@ public class Player : MonoBehaviour
         /* Currently as of 1/23/2016, GameManager is what handles firing projectiles. 
           Will probably change for other things as time goes on*/
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    
     }
     
     // See GameManager for explanations on this method.
 	void Start()
     {
-
+        anim = GetComponent<Animator>();
 	}
 
 
     // See GameManager for explanations on this method.
 	void Update() 
     {
+
+
         if (canFireIcicle || canFireSnowball)
         {
             if (icicleTimeLeft>0.0f || snowBallTimeLeft >0.0f)
@@ -79,7 +83,10 @@ public class Player : MonoBehaviour
         }
         //check for playerMovement input
         playerMovement();
-
+        
+        // update the animator after each frame
+        updateAnimator();
+        
         //check for playerAttack input
         playerAttack();
 	}
@@ -91,13 +98,24 @@ public class Player : MonoBehaviour
             Destroy(coll.gameObject);
             if (health == 0)
             {
-                //Destroy(this.gameObject);
+                anim.SetTrigger("death");
+                Destroy(this.gameObject);
             }
             health--;
         }
         //Debug.Log(health);
     }
+    
 
+    
+
+    void updateAnimator()
+    {
+        // sets the movement parameter from animations as the moveSpeed 
+        anim.SetFloat("movement", dir);
+        
+
+    }
     //handles player attacks. title yo.
     void playerAttack()
     {
@@ -129,23 +147,37 @@ public class Player : MonoBehaviour
         
         //get the direction from the inputX and inputY
         //works for diagonal movement as well
-        Vector3 dir = new Vector3(inputX, inputY, 0);
-
+        Vector3 direction = new Vector3(inputX, inputY, 0);
+        if (direction == Vector3.zero)
+        {
+            dir = 0.0f;
+        }
+        if (inputX < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX= true;
+        }
+        else if (inputX > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
         //normalize (make it 1's), although i suspect this is already normalized since inputX and inputY return values of 1, -1, or 0.
         //still, better safe than sorry lol
-        dir.Normalize();
+        direction.Normalize();
+        dir += Mathf.Abs(direction.x) + Mathf.Abs(direction.y);
+        Mathf.Clamp(dir, 0, 1);
+        
 
-        //increase the amount of movement by moveSpeed so we move. 
+        //increase the  of movement by moveSpeed so we move. 
         //moveSpeed is a float that's locked between 0 and 1. just...trust me on this one. 
-        dir *= moveSpeed;
-
+        direction *= moveSpeed;
+        
         //change the position of the Player object by calling the transform position of this game object and adding the direction
         //Vector3 testPos = transform.position + dir;
         //if ((testPos.x<-26)||(testPos.x>26) || (testPos.y>15) || (testPos.y<-15))
         //{
         //    return;
         //}
-        transform.position += (dir);
+        transform.position += (direction);
         
         //keep player in camera view
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);

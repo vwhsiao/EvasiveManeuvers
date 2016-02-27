@@ -147,7 +147,6 @@ public class waveSpawner : MonoBehaviour
     void SpawnFormation()
     {
         int randint = Random.Range(0, formations.Length);
-        Debug.Log (randint);
         GameObject chosen = formations[randint];
         Transform sp = RandomSpawnPoints[Random.Range(0, RandomSpawnPoints.Length)].GetComponent<Transform>();
         GameObject formation = Instantiate(chosen, sp.position, Quaternion.identity) as GameObject;
