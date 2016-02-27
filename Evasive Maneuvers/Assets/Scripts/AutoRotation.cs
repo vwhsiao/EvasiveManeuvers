@@ -1,34 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyAnimationGroup : MonoBehaviour
+public class AutoRotation : MonoBehaviour
 {
     public enum Rotation { NONE, CLOCKWISE, COUNTERCLOCKWISE };
     public Rotation rotation = Rotation.NONE;
     public int rotationDegrees = 30;
-    private float deltaRotationZ;
+    private int direction;
 
 	void Start()
     {
 	    switch (rotation)
         {
         case Rotation.CLOCKWISE:
-            deltaRotationZ = rotationDegrees;
+            direction = 1;
             break;
         case Rotation.COUNTERCLOCKWISE:
-            deltaRotationZ = -rotationDegrees;
+            direction = -1;
             break;
         case Rotation.NONE:
         default:
-            deltaRotationZ = 0f;
+            direction = 0;
             break;
         }
 	}
 	
 	void Update()
     {
-        Quaternion newRotation = transform.rotation;
-        newRotation.z += deltaRotationZ;
-        transform.rotation = newRotation;
+        //transform.eulerAngles = Vector3(0f, 0f, (direction)*rotationDegrees);
+        transform.Rotate(new Vector3(0f, 0f, (direction)*rotationDegrees));
     }
 }
