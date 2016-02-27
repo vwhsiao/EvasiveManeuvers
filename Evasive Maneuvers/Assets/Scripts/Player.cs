@@ -84,12 +84,13 @@ public class Player : MonoBehaviour
         //check for playerMovement input
         playerMovement();
         
-        // update the animator after each frame
-        updateAnimator();
         
         //check for playerAttack input
         playerAttack();
-	}
+
+        // update the animator after each frame
+        updateAnimator();
+    }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
@@ -98,6 +99,7 @@ public class Player : MonoBehaviour
             Destroy(coll.gameObject);
             if (health == 0)
             {
+                
                 anim.SetTrigger("death");
                 Destroy(this.gameObject);
             }
@@ -106,7 +108,6 @@ public class Player : MonoBehaviour
         //Debug.Log(health);
     }
     
-
     
 
     void updateAnimator()
