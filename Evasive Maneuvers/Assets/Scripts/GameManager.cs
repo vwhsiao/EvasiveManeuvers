@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /* MonoBehaviour basically means it inherits from Unity's special class (GameObject)
  * with it you can access functions and variables within Unity's scenes, and all GameObjects inside it.
@@ -132,4 +133,9 @@ public class GameManager : MonoBehaviour
     //    backBar.rectTransform.anchorMin = new Vector2(xbar, 0.0f);
     //    backBar.rectTransform.anchorMax = new Vector2(1.0f, 0.05f);
     //}
+
+    public void Death()
+    {
+        SceneManager.LoadScene("stats_screen");
+    }
 }

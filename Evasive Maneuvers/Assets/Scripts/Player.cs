@@ -93,13 +93,14 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "enemy")
+        if (coll.gameObject.tag == "Enemy")
         {
             Destroy(coll.gameObject);
             if (health == 0)
             {
                 anim.SetTrigger("death");
                 Destroy(this.gameObject);
+                gameManager.Death();
             }
             health--;
         }

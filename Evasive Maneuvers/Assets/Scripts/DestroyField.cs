@@ -8,8 +8,8 @@ public class DestroyField : MonoBehaviour
         switch (c.gameObject.tag)
         {
         case "playerProjectile":
-        case "enemy":
         case "Enemy":
+        case "EnemyGroup":
             Destroy(c.gameObject);
             break;
         }

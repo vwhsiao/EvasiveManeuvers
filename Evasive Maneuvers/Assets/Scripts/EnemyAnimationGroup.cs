@@ -29,7 +29,6 @@ public class EnemyAnimationGroup : MonoBehaviour
     {
         Quaternion newRotation = transform.rotation;
         newRotation.z += deltaRotationZ;
-        Debug.Log (newRotation.z);
         transform.rotation = newRotation;
     }
 }
