@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     public GameObject SnowBallPowerUp;
     public GameObject IciclePowerUp;
 
+    public GameObject StatsUI;
+    public int bulletBillMoveSpeed;
+
+
     public float icicleSpeed;
     public float snowballSpeed;
 
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour
     // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
+        StatsUI.SetActive(false);
         player = GameObject.Find("Player");
 
         //canvas = GameObject.Find("UI").GetComponent<RectTransform>();
@@ -47,7 +52,7 @@ public class GameManager : MonoBehaviour
     // Use this for initialization, it happens after Awake()
 	void Start()
     {
-	
+
 	}
 	
     /* Update is called once per frame,
@@ -57,7 +62,16 @@ public class GameManager : MonoBehaviour
      * Be careful, Update() is called often, so it slows down the game with too much in there. */
 	void Update()
     {
-        //updateHealth();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+
+            StatsUI.SetActive(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            StatsUI.SetActive(false);
+        }
 	}
 
     public void FireProjectile()
