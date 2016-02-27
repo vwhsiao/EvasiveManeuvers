@@ -13,14 +13,13 @@ public class GameManager : MonoBehaviour
     public GameObject icicle;
     public GameObject SnowBallPowerUp;
     public GameObject IciclePowerUp;
-<<<<<<< HEAD
+
     public GameObject StatsUI;
     public int bulletBillMoveSpeed;
-=======
+
 
     public float icicleSpeed;
     public float snowballSpeed;
->>>>>>> 49bfbab03a7d06b2856d4d99665c4156bdc45f47
 
     //private variables
     private GameObject player;
