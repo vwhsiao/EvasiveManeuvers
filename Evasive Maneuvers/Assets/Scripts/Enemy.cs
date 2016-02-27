@@ -41,10 +41,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(this.gameObject);
 			
-            if (!coll.gameObject.name.Contains("Icicle"))
+            /*if (!coll.gameObject.name.Contains("Icicle"))
             {
                 Destroy(coll.gameObject);
-            }
+            }*/
 		}
         else
         {

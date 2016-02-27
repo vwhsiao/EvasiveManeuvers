@@ -6,18 +6,28 @@ using System.Collections;
 //Movement is handled by the physics engine as GameManager class creates projectiles and lets physics handle the rest
 public class Projectile : MonoBehaviour
 {
-   
+    public Vector3 destination;
+    public float speed;
 	// Use this for initialization
 	void Start()
     {
         //Invoke calls a function after a predetermined time
-        Invoke("kill", 3);
+        if (destination == null)
+            Invoke("kill", 3);
 	}
 	
 	// Update is called once per frame
 	void Update()
     {
-	   
+	    if (destination != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, destination, speed);
+            if (transform.position == destination)
+            {
+                GetComponent<CircleCollider2D>().enabled = true;
+                Invoke("kill", 1);
+            }
+        }
 	}
     
     

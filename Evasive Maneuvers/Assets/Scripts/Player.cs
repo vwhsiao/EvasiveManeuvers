@@ -137,6 +137,12 @@ public class Player : MonoBehaviour
             //GameManager class handles this
             gameManager.FireProjectile();
         }
+        else if ((timeSinceFiring <=0) && Input.GetMouseButton(1))
+        {
+            timeSinceFiring = fireSpeed;
+            
+            gameManager.FireSnowbomb();
+        }
     }
 
     //handles playerMovement. again. Title yo
@@ -195,10 +201,6 @@ public class Player : MonoBehaviour
 
     public void setFireSnowball()
     {
-        if (canFireIcicle)
-        {
-            return;
-        }
         canFireSnowball = true;
         snowBallTimeLeft = 15.0f;
     }
@@ -207,10 +209,6 @@ public class Player : MonoBehaviour
     {
         canFireIcicle = true;
         icicleTimeLeft = 15.0f;
-        if (canFireSnowball)
-        {
-            canFireSnowball = false;
-        }
 
     }
 }
