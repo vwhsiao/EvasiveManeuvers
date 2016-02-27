@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
         //Debug.Log(health);
     }
 
+    // function that destroys the player when it is called
     void Destroyobject()
     {
         Destroy(this.gameObject);
