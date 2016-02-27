@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject StatsUI;
     public int bulletBillMoveSpeed;
-
+    
+    public int enemiesKilledCount;
+    public int enemiesDodgedCount;
 
     public float icicleSpeed;
     public float snowballSpeed;
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour
     //private variables
     private GameObject player;
     private Vector2 direction;
+
+    private Text enemiesDodgedCountText, enemiesKilledCountText;
     //private RectTransform canvas;
     //private Image healthBar, backBar;
     //float xbar;
@@ -32,9 +36,13 @@ public class GameManager : MonoBehaviour
     // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
-        StatsUI.SetActive(false);
-        player = GameObject.Find("Player");
 
+        player = GameObject.Find("Player");
+        enemiesDodgedCount = 0;
+        enemiesKilledCount = 0;
+        enemiesDodgedCountText = GameObject.Find("enemiesDodgedCount").GetComponent<Text>();
+        enemiesKilledCountText = GameObject.Find("enemiesKilledCount").GetComponent<Text>();
+        StatsUI.SetActive(false);
         //canvas = GameObject.Find("UI").GetComponent<RectTransform>();
 
         //GameObject healthFront = new GameObject("healthBar");
@@ -64,7 +72,6 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-
             StatsUI.SetActive(true);
         }
 
@@ -92,6 +99,23 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void SetStats()
+    {
+        enemiesDodgedCountText.text = enemiesDodgedCount.ToString();
+        enemiesKilledCountText.text = enemiesKilledCount.ToString();
+    }
+
+    public void IncrementEnemiesDodgedCount(int num)
+    {
+        enemiesDodgedCount+=num;
+        SetStats();
+    }
+    public void IncrementEnemiesKilledCount(int num)
+    {
+        enemiesKilledCount+=num;
+        SetStats();
+    }
+
     public void FireSnowbomb()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -106,10 +130,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void createPowerUp()
-    {
 
-    }
 
     void moveProjectile(GameObject projectile, Vector3 mousePos)
     {

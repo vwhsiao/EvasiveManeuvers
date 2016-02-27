@@ -3,6 +3,11 @@ using System.Collections;
 
 public class DestroyField : MonoBehaviour
 {
+
+    void Start()
+    {
+
+    }
     void OnTriggerEnter2D(Collider2D c)
     {
         switch (c.gameObject.tag)
