@@ -21,6 +21,13 @@ public class Projectile : MonoBehaviour
 	}
     
     
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.name.Contains("PowerUp"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>());
+        }
+    }
 
     //Destroys this object after a set time so we do'nt use up a ton of processing power
     //Unity still renders and calculates collisions for things that aren't on screen, 

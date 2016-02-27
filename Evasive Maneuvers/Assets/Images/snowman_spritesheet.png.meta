@@ -1,0 +1,318 @@
+fileFormatVersion: 2
+guid: 641d32d800502f14bbdbb402894353f0
+timeCreated: 1456389361
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: snowman_spritesheet_0
+    21300002: snowman_spritesheet_1
+    21300004: snowman_spritesheet_2
+    21300006: snowman_spritesheet_3
+    21300008: snowman_spritesheet_4
+    21300010: snowman_spritesheet_5
+    21300012: snowman_spritesheet_6
+    21300014: snowman_spritesheet_7
+    21300016: snowman_spritesheet_8
+    21300018: snowman_spritesheet_9
+    21300020: snowman_spritesheet_10
+    21300022: snowman_spritesheet_11
+    21300024: snowman_spritesheet_12
+    21300026: snowman_spritesheet_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: snowman_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 386
+        width: 123
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26.5, y: 72}
+        - {x: -61.5, y: 72}
+        - {x: -61.5, y: -28}
+        - {x: -32.5, y: -72}
+        - {x: 46.5, y: -72}
+        - {x: 61.5, y: -4}
+        - {x: 61.5, y: 51}
+        - {x: -1.5, y: 69}
+    - name: snowman_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 388
+        width: 123
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4.5, y: 73}
+        - {x: -61.5, y: 73}
+        - {x: -61.5, y: 18}
+        - {x: -45.5, y: -73}
+        - {x: 47.5, y: -73}
+        - {x: 61.5, y: -39}
+        - {x: 61.5, y: 56}
+        - {x: 52.5, y: 59}
+    - name: snowman_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 385
+        width: 123
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4.5, y: 73}
+        - {x: -61.5, y: 73}
+        - {x: -61.5, y: 18}
+        - {x: -45.5, y: -73}
+        - {x: 47.5, y: -73}
+        - {x: 61.5, y: -39}
+        - {x: 61.5, y: 56}
+        - {x: 52.5, y: 59}
+    - name: snowman_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 385
+        width: 128
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 13, y: 70.5}
+        - {x: -62, y: 70.5}
+        - {x: -64, y: 54.5}
+        - {x: -64, y: -70.5}
+        - {x: 9, y: -70.5}
+        - {x: 64, y: -12.5}
+        - {x: 64, y: 21.5}
+        - {x: 16, y: 69.5}
+    - name: snowman_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 386
+        width: 123
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.5, y: 73.5}
+        - {x: -61.5, y: -36.5}
+        - {x: -44.5, y: -47.5}
+        - {x: -36.5, y: -47.5}
+        - {x: -43.5, y: -58.5}
+        - {x: -35.5, y: -73.5}
+        - {x: 50.5, y: -73.5}
+        - {x: 51.5, y: -57.5}
+        - {x: 61.5, y: -53.5}
+        - {x: 61.5, y: 73.5}
+    - name: snowman_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 423
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: snowman_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 383
+        width: 130
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -32.5}
+        - {x: 65, y: 52.5}
+        - {x: -31, y: 73.5}
+        - {x: -65, y: 73.5}
+        - {x: -65, y: -62.5}
+        - {x: -64, y: -73.5}
+        - {x: 46, y: -73.5}
+        - {x: 48, y: -57.5}
+        - {x: 41, y: -49.5}
+    - name: snowman_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 215
+        width: 123
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.5, y: 73}
+        - {x: -61.5, y: -62}
+        - {x: -60.5, y: -73}
+        - {x: 39.5, y: -73}
+        - {x: 61.5, y: -67}
+        - {x: 61.5, y: 60}
+        - {x: 29.5, y: 73}
+    - name: snowman_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 221
+        width: 123
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.5, y: 70}
+        - {x: -61.5, y: -70}
+        - {x: 61.5, y: -70}
+        - {x: 61.5, y: 64}
+        - {x: 27.5, y: 70}
+    - name: snowman_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 234
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: snowman_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 39
+        width: 119
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14.5, y: 59.5}
+        - {x: 0.5, y: 65.5}
+        - {x: -33.5, y: 75.5}
+        - {x: -59.5, y: 75.5}
+        - {x: -59.5, y: -54.5}
+        - {x: -50.5, y: -75.5}
+        - {x: 30.5, y: -75.5}
+        - {x: 59.5, y: -7.5}
+        - {x: 59.5, y: 36.5}
+    - name: snowman_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 19
+        width: 125
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -62.5, y: 57}
+        - {x: -62.5, y: -57}
+        - {x: 14.5, y: -57}
+        - {x: 62.5, y: -39}
+        - {x: 62.5, y: 39}
+        - {x: 12.5, y: 57}
+    - name: snowman_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 16
+        width: 141
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -70.5, y: -2.5}
+        - {x: -70.5, y: -56.5}
+        - {x: 8.5, y: -56.5}
+        - {x: 70.5, y: -6.5}
+        - {x: 70.5, y: 56.5}
+        - {x: 35.5, y: 56.5}
+        - {x: -61.5, y: 34.5}
+    - name: snowman_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 14
+        width: 168
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50, y: 41}
+        - {x: -81, y: -4}
+        - {x: -84, y: -9}
+        - {x: -84, y: -41}
+        - {x: 60, y: -41}
+        - {x: 84, y: -19}
+        - {x: 84, y: 23}
+        - {x: 34, y: 41}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

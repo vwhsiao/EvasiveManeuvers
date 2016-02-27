@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 using System;
 
@@ -7,6 +8,8 @@ public class waveSpawner : MonoBehaviour
 {
    // private GameObject Enemy;
     private GameManager gameManager;
+
+    public GameObject[] formations;
 
     public enum SpawnState { SPAWNING, WAITING, COUNTING };
 
@@ -103,7 +106,7 @@ public class waveSpawner : MonoBehaviour
         searchCountDown -= Time.deltaTime;
         if (searchCountDown <= 0f)
         {
-            Debug.Log("setting search to 1");
+            //Debug.Log("setting search to 1");
 
             searchCountDown = 1f;
             if (GameObject.FindGameObjectWithTag("Enemy") == null)
@@ -125,7 +128,7 @@ public class waveSpawner : MonoBehaviour
         for(int i = 0; i < _wave.count; i++)
         {
             SpawnEnemy(_wave.Projectile);
-            Debug.Log("PROJECT IS AT:" + RandomSpawnPoints.GetValue(1));
+            //Debug.Log("PROJECT IS AT:" + RandomSpawnPoints.GetValue(1));
             yield return new WaitForSeconds(1f / _wave.rate);
         }
         state = SpawnState.WAITING;
@@ -134,23 +137,18 @@ public class waveSpawner : MonoBehaviour
     }
     void SpawnEnemy(GameObject _Projectile)
     {
- 
-        Transform _sp = RandomSpawnPoints[UnityEngine.Random.Range(0, RandomSpawnPoints.Length-1)].GetComponent<Transform>();
-        GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
-        formation.GetComponent<enemyTest>().SetDirection();
-        //Debug.Log(formation);
-        //float locationX = _sp.position.x;
-        //GameObject[] listOfDestinations = new GameObject[RandomSpawnPoints.Length - 1];
-        //for (int i = 0; i< RandomSpawnPoints.Length-1; i++)
-        //{
-        //    if (RandomSpawnPoints[i].GetComponent<Transform>().position.x != locationX)
-        //    {
-        //        listOfDestinations[i] = RandomSpawnPoints[i];
-        //    }
-        //}
-        
-//        int rng = UnityEngine.Random.Range(0, 3);
+        SpawnFormation();
+        //return;
 
-        //formation.GetComponent<enemyTest>().SetDirection(listOfDestinations[rng].GetComponent<Transform>());
+        Transform _sp = RandomSpawnPoints[Random.Range(0, RandomSpawnPoints.Length)].GetComponent<Transform>();
+        GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
+    }
+
+    void SpawnFormation()
+    {
+        int randint = Random.Range(0, formations.Length);
+        GameObject chosen = formations[randint];
+        Transform sp = RandomSpawnPoints[Random.Range(0, RandomSpawnPoints.Length)].GetComponent<Transform>();
+        GameObject formation = Instantiate(chosen, sp.position, Quaternion.identity) as GameObject;
     }
 }

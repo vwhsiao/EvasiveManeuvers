@@ -4,28 +4,33 @@ using System.Collections;
 public class EnemyGroup : MonoBehaviour {
     private GameObject player;
     private Vector3 direction;
-    public float speed = 5.0f; // move speed
+    public float speed = 0.1f; // move speed
 
-	// Use this for initialization
-	void Start () {
+	void Start()
+    {
         player = GameObject.Find("Player");
         SetDirection();
+        //Invoke("Kill", 20.0f);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        move();
+    void Kill()
+    {
+        Destroy(this.gameObject);
+    }
+
+	void Update()
+    {
+        Move();
 	}
 
     public void SetDirection()
     {
         direction = player.transform.position - transform.position;
         direction.Normalize();
-
     }
-    void move()
+
+    void Move()
     {
         transform.Translate(speed * direction);
-
     }
 }
