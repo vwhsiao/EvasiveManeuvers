@@ -13,8 +13,14 @@ public class GameManager : MonoBehaviour
     public GameObject icicle;
     public GameObject SnowBallPowerUp;
     public GameObject IciclePowerUp;
+<<<<<<< HEAD
     public GameObject StatsUI;
     public int bulletBillMoveSpeed;
+=======
+
+    public float icicleSpeed;
+    public float snowballSpeed;
+>>>>>>> 49bfbab03a7d06b2856d4d99665c4156bdc45f47
 
     //private variables
     private GameObject player;
@@ -79,19 +85,26 @@ public class GameManager : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
 
         //Create the object as a GameObject so we can still change values of it
-        if (player.GetComponent<Player>().canFireSnowball)
-        {
-            GameObject firedProjectile = Instantiate(snowBall, player.transform.position, rotation) as GameObject;
-            moveProjectile(firedProjectile, mousePos);
-        }
         if (player.GetComponent<Player>().canFireIcicle)
         {
             GameObject firedProjectile = Instantiate(icicle, player.transform.position, rotation) as GameObject;
             moveProjectile(firedProjectile, mousePos);
         }
-        
 
+    }
+
+    public void FireSnowbomb()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
+        if (player.GetComponent<Player>().canFireSnowball)
+        {
+            GameObject firedProjectile = Instantiate(snowBall, player.transform.position, rotation) as GameObject;
+            firedProjectile.GetComponent<Projectile>().destination = mousePos;
+            firedProjectile.GetComponent<Projectile>().speed = snowballSpeed;
+            firedProjectile.GetComponent<CircleCollider2D>().enabled = false;
+        }
     }
 
     void createPowerUp()
@@ -114,7 +127,7 @@ public class GameManager : MonoBehaviour
         projectile.transform.position += new Vector3(direction.x * 2, direction.y * 2, 0);
 
         //increase the projectile velocity so it actually, you know, projectiles
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * bulletBillMoveSpeed;
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * icicleSpeed;
 
         //logistical thing, set the parent of the object to the GameManager so we do'nt flood the hierarchy screen
         projectile.transform.parent = transform;
