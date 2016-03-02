@@ -6,10 +6,11 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     public float speed = 5.0f; // move speed
     private Vector3 direction;
-
+    private GameManager gameManager;
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         SetDirection();
         //Invoke("Kill", 5.0f);
     }
@@ -39,12 +40,13 @@ public class Enemy : MonoBehaviour
     {
 		if (coll.gameObject.tag == "playerProjectile")
         {
+            gameManager.IncrementEnemiesKilledCount(1);
             Destroy(this.gameObject);
 			
-            if (!coll.gameObject.name.Contains("Icicle"))
+            /*if (!coll.gameObject.name.Contains("Icicle"))
             {
                 Destroy(coll.gameObject);
-            }
+            }*/
 		}
         else
         {

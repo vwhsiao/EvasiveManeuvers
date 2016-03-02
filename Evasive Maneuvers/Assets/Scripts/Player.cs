@@ -6,7 +6,8 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     //Player Member Variables
-    Animator anim;
+    public Animator anim;
+   
     //Public
 
     /* The brackets used within MonoBehaviour are for customization of the Unity inspector,
@@ -57,14 +58,16 @@ public class Player : MonoBehaviour
     }
     
     // See GameManager for explanations on this method.
-	void Start()
-    {
+	void Start(){
         anim = GetComponent<Animator>();
-	}
+        
+            
+    }
+    
 
 
     // See GameManager for explanations on this method.
-	void Update() 
+    void Update() 
     {
 
 
@@ -84,12 +87,13 @@ public class Player : MonoBehaviour
         //check for playerMovement input
         playerMovement();
         
-        // update the animator after each frame
-        updateAnimator();
         
         //check for playerAttack input
         playerAttack();
-	}
+
+        // update the animator after each frame
+        updateAnimator();
+    }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
@@ -98,17 +102,38 @@ public class Player : MonoBehaviour
             Destroy(coll.gameObject);
             if (health == 0)
             {
+                
                 anim.SetTrigger("death");
-                Destroy(this.gameObject);
-                gameManager.Death();
+                //Destroytimer(1);
+                   
+                  
+
+
+                // Destroy(this.gameObject);
+                //gameManager.Death();
             }
             health--;
         }
         //Debug.Log(health);
     }
-    
 
+    // function that destroys the player when it is called
+    void Destroyobject()
+    {
+        Destroy(this.gameObject);
+    }
     
+    /*IEnumerator Destroytimer(float waitTime)
+    {
+        float timer = Time.time + waitTime;
+        while (Time.time > timer){
+            yield return null;
+        }
+    
+        
+            Destroy(this.gameObject);
+        
+    }*/
 
     void updateAnimator()
     {
@@ -136,6 +161,12 @@ public class Player : MonoBehaviour
             //call the GameManager class to fire a projectile. 
             //GameManager class handles this
             gameManager.FireProjectile();
+        }
+        else if ((timeSinceFiring <=0) && Input.GetMouseButton(1))
+        {
+            timeSinceFiring = fireSpeed;
+            
+            gameManager.FireSnowbomb();
         }
     }
 
@@ -195,10 +226,6 @@ public class Player : MonoBehaviour
 
     public void setFireSnowball()
     {
-        if (canFireIcicle)
-        {
-            return;
-        }
         canFireSnowball = true;
         snowBallTimeLeft = 15.0f;
     }
@@ -207,10 +234,6 @@ public class Player : MonoBehaviour
     {
         canFireIcicle = true;
         icicleTimeLeft = 15.0f;
-        if (canFireSnowball)
-        {
-            canFireSnowball = false;
-        }
 
     }
 }
