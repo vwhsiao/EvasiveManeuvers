@@ -35,6 +35,7 @@ public class PowerUpSpawner : MonoBehaviour
         float randX = Random.Range(-xRange, xRange);
         float randY = Random.Range(-yRange, yRange);
         GameObject chosen = powerUps[randint];
-        GameObject powerUp = Instantiate(chosen, new Vector3(randX, randY, 0), chosen.transform.rotation) as GameObject;
+//        GameObject powerUp = Instantiate(chosen, new Vector3(randX, randY, 0), chosen.transform.rotation) as GameObject;
+        Instantiate(chosen, new Vector3(randX, randY, 0), chosen.transform.rotation);
     }
 }

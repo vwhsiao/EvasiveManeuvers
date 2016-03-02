@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private Vector2 direction;
 
-    private Text enemiesDodgedCountText, enemiesKilledCountText;
+    private Text enemiesDodgedCountText, enemiesKilledCountText, timerText, statsUITimerText;
+    private Image icicleTimerImage, snowballTimerImage;
+    private float currentTime = 0.0f;
+    private GameObject HUD;
     //private RectTransform canvas;
     //private Image healthBar, backBar;
     //float xbar;
@@ -42,7 +45,10 @@ public class GameManager : MonoBehaviour
         enemiesKilledCount = 0;
         enemiesDodgedCountText = GameObject.Find("enemiesDodgedCount").GetComponent<Text>();
         enemiesKilledCountText = GameObject.Find("enemiesKilledCount").GetComponent<Text>();
+        timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        statsUITimerText = GameObject.Find("StatsUITimerText").GetComponent<Text>();
         StatsUI.SetActive(false);
+        HUD = GameObject.Find("HUD");
         //canvas = GameObject.Find("UI").GetComponent<RectTransform>();
 
         //GameObject healthFront = new GameObject("healthBar");
@@ -70,14 +76,21 @@ public class GameManager : MonoBehaviour
      * Be careful, Update() is called often, so it slows down the game with too much in there. */
 	void Update()
     {
+        currentTime += Time.deltaTime;
+        float newTime = Mathf.Floor(currentTime * 100.0f + 0.5f) / 100;
+        timerText.text = newTime.ToString();
+        statsUITimerText.text = newTime.ToString();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             StatsUI.SetActive(true);
+            HUD.SetActive(false);
+         //   statsUITimerText.text = newTime.ToString();
         }
 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             StatsUI.SetActive(false);
+            HUD.SetActive(true);
         }
 	}
 

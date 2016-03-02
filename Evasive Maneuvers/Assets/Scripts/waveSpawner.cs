@@ -141,7 +141,8 @@ public class waveSpawner : MonoBehaviour
         //return;
 
         Transform _sp = RandomSpawnPoints[Random.Range(0, RandomSpawnPoints.Length)].GetComponent<Transform>();
-        GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
+        //GameObject formation = Instantiate(_Projectile, _sp.position, Quaternion.identity) as GameObject;
+        Instantiate(_Projectile, _sp.position, Quaternion.identity);
     }
 
     void SpawnFormation()
@@ -149,6 +150,7 @@ public class waveSpawner : MonoBehaviour
         int randint = Random.Range(0, formations.Length);
         GameObject chosen = formations[randint];
         Transform sp = RandomSpawnPoints[Random.Range(0, RandomSpawnPoints.Length)].GetComponent<Transform>();
-        GameObject formation = Instantiate(chosen, sp.position, Quaternion.identity) as GameObject;
+        //GameObject formation = Instantiate(chosen, sp.position, Quaternion.identity) as GameObject;
+        Instantiate(chosen, sp.position, Quaternion.identity);
     }
 }

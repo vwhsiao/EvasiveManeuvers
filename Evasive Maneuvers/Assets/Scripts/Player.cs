@@ -188,8 +188,8 @@ public class Player : MonoBehaviour
         
         //keep player in camera view
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        pos.x = Mathf.Clamp(pos.x, 0.01f, 0.99f);
-        pos.y = Mathf.Clamp(pos.y, 0.01f, 0.99f);
+        pos.x = Mathf.Clamp(pos.x, 0.02f, 0.98f);
+        pos.y = Mathf.Clamp(pos.y, 0.05f, 0.95f);
         transform.position = Camera.main.ViewportToWorldPoint(pos);
         
     }
