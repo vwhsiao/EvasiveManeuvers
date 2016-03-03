@@ -32,11 +32,16 @@ public class GameManager : MonoBehaviour
     //private Image healthBar, backBar;
     //float xbar;
 
+    public bool playing;
+    public static GameManager instance;
 
     // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
+        DontDestroyOnLoad(this);
+        instance = this;
 
+        playing = true;
         player = GameObject.Find("Player");
         enemiesDodgedCount = 0;
         enemiesKilledCount = 0;
@@ -70,6 +75,9 @@ public class GameManager : MonoBehaviour
      * Be careful, Update() is called often, so it slows down the game with too much in there. */
 	void Update()
     {
+        if (!GameManager.instance.playing)
+            return;
+        
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             StatsUI.SetActive(true);
@@ -179,6 +187,8 @@ public class GameManager : MonoBehaviour
 
     public void Death()
     {
+        StatsUI.transform.SetParent(transform);
         SceneManager.LoadScene("stats_screen");
+        StatsUI.SetActive(true);
     }
 }

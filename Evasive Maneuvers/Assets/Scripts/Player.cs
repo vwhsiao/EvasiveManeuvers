@@ -45,23 +45,14 @@ public class Player : MonoBehaviour
     private float icicleTimeLeft = 15.0f;
     // See GameManager for explanations on this method.
     void Awake()
-    {
-        /*Finds the Game Manager object in the scene and saves the GameManager component to the private variable.
-         * Avoid using GameObject.Find() too much, because it loops through every object in the scene,
-         * searching for the object by exact name. If you misspelled something or changed a name,
-         * it will give you trouble. Also if you have a lot of objects... */
-
-        /* Currently as of 1/23/2016, GameManager is what handles firing projectiles. 
-          Will probably change for other things as time goes on*/
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    
+    {    
     }
     
     // See GameManager for explanations on this method.
-	void Start(){
+	void Start()
+    {
+        gameManager = GameManager.instance;
         anim = GetComponent<Animator>();
-        
-            
     }
     
 
@@ -69,7 +60,8 @@ public class Player : MonoBehaviour
     // See GameManager for explanations on this method.
     void Update() 
     {
-
+        if (!GameManager.instance.playing)
+            return;
 
         if (canFireIcicle || canFireSnowball)
         {
@@ -102,7 +94,7 @@ public class Player : MonoBehaviour
             Destroy(coll.gameObject);
             if (health == 0)
             {
-                
+                GameManager.instance.playing = false;
                 anim.SetTrigger("death");
                 //Destroytimer(1);
                    
@@ -120,7 +112,8 @@ public class Player : MonoBehaviour
     // function that destroys the player when it is called
     void Destroyobject()
     {
-        Destroy(this.gameObject);
+        gameManager.Death();
+        //Destroy(this.gameObject);
     }
     
     /*IEnumerator Destroytimer(float waitTime)

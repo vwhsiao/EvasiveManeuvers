@@ -47,13 +47,16 @@ public class waveSpawner : MonoBehaviour
 
     void Start()
     {
-       RandomSpawnPoints =  GameObject.FindGameObjectsWithTag("Respawn");
+        gameManager = GameManager.instance;
+        RandomSpawnPoints =  GameObject.FindGameObjectsWithTag("Respawn");
         waveCountDown = timeBetweenWaves;
-
     }
 
     void Update()
     {
+        if (!GameManager.instance.playing)
+            return;
+        
         if (state == SpawnState.WAITING)
         {
            if(!EnemyIsAlive())
@@ -137,6 +140,9 @@ public class waveSpawner : MonoBehaviour
     }
     void SpawnEnemy(GameObject _Projectile)
     {
+        if (!GameManager.instance.playing)
+            return;
+        
         SpawnFormation();
         //return;
 

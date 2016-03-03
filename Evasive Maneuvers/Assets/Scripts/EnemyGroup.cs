@@ -8,7 +8,7 @@ public class EnemyGroup : MonoBehaviour {
     private GameManager gameManager;
 	void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
         player = GameObject.Find("Player");
         SetDirection();
         //Invoke("Kill", 20.0f);
@@ -27,6 +27,9 @@ public class EnemyGroup : MonoBehaviour {
 
 	void Update()
     {
+        if (!GameManager.instance.playing)
+            return;
+
         Move();
 	}
 

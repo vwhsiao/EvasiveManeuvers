@@ -21,6 +21,9 @@ public class PowerUpSpawner : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.instance.playing)
+            return;
+        
         timer -= timerRate;
         if (timer <= 0)
         {

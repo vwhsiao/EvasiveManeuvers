@@ -19,6 +19,9 @@ public class Projectile : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+        if (!GameManager.instance.playing)
+            return;
+
 	    if (destination != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, destination, speed);

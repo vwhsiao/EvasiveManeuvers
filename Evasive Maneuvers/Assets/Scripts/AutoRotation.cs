@@ -27,6 +27,9 @@ public class AutoRotation : MonoBehaviour
 	
 	void Update()
     {
+        if (!GameManager.instance.playing)
+            return;
+
         //transform.eulerAngles = Vector3(0f, 0f, (direction)*rotationDegrees);
         transform.Rotate(new Vector3(0f, 0f, (direction)*rotationDegrees));
     }
