@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     //public variables
+    public GameObject camera;
+
     public GameObject snowBall;
     public GameObject icicle;
     public GameObject SnowBallPowerUp;

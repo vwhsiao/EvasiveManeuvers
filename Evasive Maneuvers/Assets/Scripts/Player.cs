@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
             if (health == 0)
             {
                 GameManager.instance.playing = false;
+                GameManager.instance.camera.GetComponent<AudioSource>().mute = true;
                 anim.SetTrigger("death");
                 //Destroytimer(1);
                    
