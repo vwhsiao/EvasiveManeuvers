@@ -28,10 +28,11 @@ public class Player : MonoBehaviour
     public float fireSpeed;
     public bool canFireSnowball = false;
     public bool canFireIcicle = false;
+    public Image snowBallTimer;
+    public Image icicleTimer;
 
-	
-
-    
+    public float snowBallMaxTime = 3.0f;
+    public float icicleMaxTime = 3.0f;
     //Private
     //last time since a player has fired. this will be set later in playerAttack function
     private float timeSinceFiring=0.0f;
@@ -41,8 +42,9 @@ public class Player : MonoBehaviour
     //for now, it's just projectile management. 
     private GameManager gameManager;
     
-    private float snowBallTimeLeft = 15.0f;
-    private float icicleTimeLeft = 15.0f;
+    private float snowBallTimeLeft = 0.0f;
+    private float icicleTimeLeft = 0.0f;
+
     // See GameManager for explanations on this method.
     void Awake()
     {    
@@ -65,15 +67,26 @@ public class Player : MonoBehaviour
 
         if (canFireIcicle || canFireSnowball)
         {
-            if (icicleTimeLeft>0.0f || snowBallTimeLeft >0.0f)
+            if (icicleTimeLeft>0.0f )
             {
                 icicleTimeLeft -= Time.deltaTime;
+                float iciclePercent = icicleTimeLeft / icicleMaxTime;
+                icicleTimer.fillAmount = iciclePercent;
+            }
+            else
+            {
+                canFireIcicle = false;
+
+            }
+            if (snowBallTimeLeft>0.0f)
+            {
                 snowBallTimeLeft -= Time.deltaTime;
+                float snowBallPercent = snowBallTimeLeft / snowBallMaxTime;
+                snowBallTimer.fillAmount = snowBallPercent;
             }
             else
             {
                 canFireSnowball = false;
-                canFireIcicle = false;
             }
         }
         //check for playerMovement input
@@ -221,13 +234,13 @@ public class Player : MonoBehaviour
     public void setFireSnowball()
     {
         canFireSnowball = true;
-        snowBallTimeLeft = 15.0f;
+        snowBallTimeLeft = snowBallMaxTime;
     }
 
     public void setFireIcicle()
     {
         canFireIcicle = true;
-        icicleTimeLeft = 15.0f;
+        icicleTimeLeft = icicleMaxTime;
 
     }
 }

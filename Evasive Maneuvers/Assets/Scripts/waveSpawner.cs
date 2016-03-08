@@ -135,7 +135,7 @@ public class waveSpawner : MonoBehaviour
             yield return new WaitForSeconds(1f / _wave.rate);
         }
         state = SpawnState.WAITING;
-
+        gameManager.IncrementWaveCount();
         yield break;
     }
     void SpawnEnemy(GameObject _Projectile)

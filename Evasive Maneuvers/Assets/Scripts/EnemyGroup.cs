@@ -21,8 +21,9 @@ public class EnemyGroup : MonoBehaviour {
 
     void OnDestroy()
     {
+
+        gameManager.IncrementEnemiesDodgedCount(transform.GetChild(0).childCount);
         
-        gameManager.IncrementEnemiesDodgedCount(transform.childCount);
     }
 
 	void Update()

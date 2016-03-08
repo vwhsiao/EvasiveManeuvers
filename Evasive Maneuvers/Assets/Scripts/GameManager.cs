@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public float icicleSpeed;
     public float snowballSpeed;
+    public Text waveNumText;
 
     //private variables
     private GameObject player;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     private Image icicleTimerImage, snowballTimerImage;
     private float currentTime = 0.0f;
     private GameObject HUD;
+    private int waveNum = 1;
     //private RectTransform canvas;
     //private Image healthBar, backBar;
     //float xbar;
@@ -85,26 +87,30 @@ public class GameManager : MonoBehaviour
     {
         if (!GameManager.instance.playing)
             return;
-        
+        waveNumText.text = waveNum.ToString();
         currentTime += Time.deltaTime;
         float newTime = Mathf.Floor(currentTime * 100.0f + 0.5f) / 100;
         timerText.text = newTime.ToString();
         statsUITimerText.text = newTime.ToString();
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             StatsUI.SetActive(true);
             HUD.SetActive(false);
          //   statsUITimerText.text = newTime.ToString();
         }
 
-        if (Input.GetKeyUp(KeyCode.Tab))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             StatsUI.SetActive(false);
             HUD.SetActive(true);
         }
 	}
 
+    public void IncrementWaveCount()
+    {
+        waveNum++;
+    }
     public void FireProjectile()
     {
         //find mouse position and translate that into a Vector with 3 floats (x,y,z)
@@ -125,8 +131,15 @@ public class GameManager : MonoBehaviour
 
     void SetStats()
     {
-        enemiesDodgedCountText.text = enemiesDodgedCount.ToString();
-        enemiesKilledCountText.text = enemiesKilledCount.ToString();
+        try
+        {
+            enemiesDodgedCountText.text = enemiesDodgedCount.ToString();
+            enemiesKilledCountText.text = enemiesKilledCount.ToString();
+        }
+        catch
+        {
+
+        }
     }
 
     public void IncrementEnemiesDodgedCount(int num)
