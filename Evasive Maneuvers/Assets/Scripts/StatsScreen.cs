@@ -10,12 +10,8 @@ public class StatsScreen : MonoBehaviour
 	void Start()
     {
         GameManager.instance.StatsUI.transform.SetParent(canvas.transform);
-	}
-	
-	// Update is called once per frame
-	void Update()
-    {
-	
+        Transform statsUI = canvas.transform.FindChild("StatsUI");
+        statsUI.SetSiblingIndex(0);
 	}
 
     public void ToMainMenu()
