@@ -21,7 +21,11 @@ public class Player : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float moveSpeed;
     public float dir;
-    
+    public AudioClip[] audioList;
+    public AudioClip getHit;
+    public AudioClip dyingSound;
+    public AudioClip explosion;
+
 
     //how many shots the player can fire per second. lower number = higher fire rate
     [Range(0.0f, 2.0f)]
@@ -41,13 +45,16 @@ public class Player : MonoBehaviour
     //gets the reference to the GameManager object to handle game related stuff. 
     //for now, it's just projectile management. 
     private GameManager gameManager;
-    
+    private AudioSource source; // AudioSource component
+    private Animation animate; // Legacy animation component. used for the getting hit animation
+
     private float snowBallTimeLeft = 0.0f;
     private float icicleTimeLeft = 0.0f;
 
     // See GameManager for explanations on this method.
     void Awake()
-    {    
+    {
+        source = GetComponent<AudioSource>();
     }
     
     // See GameManager for explanations on this method.
@@ -105,6 +112,7 @@ public class Player : MonoBehaviour
         if (coll.gameObject.tag == "Enemy")
         {
             Destroy(coll.gameObject);
+            PlaySound(0);
             if (health == 0)
             {
                 GameManager.instance.playing = false;
@@ -118,8 +126,17 @@ public class Player : MonoBehaviour
                 // Destroy(this.gameObject);
                 //gameManager.Death();
             }
+            damageAnimate();
             health--;
         }
+
+        /*if (coll.gameObject.tag == "Explosion")
+        {
+            PlaySound(1);
+        }if (coll.gameObject.tag == "PowerUp")
+        {
+            PlaySound(0);
+        }*/
         //Debug.Log(health);
     }
 
@@ -129,7 +146,23 @@ public class Player : MonoBehaviour
         gameManager.Death();
         //Destroy(this.gameObject);
     }
-    
+
+    void damageAnimate()
+    {
+        animate = GetComponent<Animation>();
+        animate.Play();
+    }
+
+    void PlaySound(int clip)
+    {
+        source.clip = audioList[clip];
+        source.Play();
+    }
+    void deathSound()
+    {
+        source.PlayOneShot(dyingSound, 1f);
+    }
+
     /*IEnumerator Destroytimer(float waitTime)
     {
         float timer = Time.time + waitTime;

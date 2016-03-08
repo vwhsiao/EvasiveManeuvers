@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     //public variables
     public GameObject camera;
+    public AudioClip shootSound;
+    public AudioClip shootSnow;
 
     public GameObject snowBall;
     public GameObject icicle;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     //private variables
     private GameObject player;
     private Vector2 direction;
+    private AudioSource source;
 
     private Text enemiesDodgedCountText, enemiesKilledCountText, timerText, statsUITimerText;
     private Image icicleTimerImage, snowballTimerImage;
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
     // Awake is called when this script is first activated, kind of like the Init()
     void Awake()
     {
+        source = GetComponent<AudioSource>();
         DontDestroyOnLoad(this);
         instance = this;
 
@@ -123,6 +127,7 @@ public class GameManager : MonoBehaviour
         //Create the object as a GameObject so we can still change values of it
         if (player.GetComponent<Player>().canFireIcicle)
         {
+            source.PlayOneShot(shootSound, .7f); // plays sound for firing
             GameObject firedProjectile = Instantiate(icicle, player.transform.position, rotation) as GameObject;
             moveProjectile(firedProjectile, mousePos);
         }
@@ -160,6 +165,7 @@ public class GameManager : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, mousePos - player.transform.position);
         if (player.GetComponent<Player>().canFireSnowball)
         {
+            source.PlayOneShot(shootSnow, .7f); // plays sound for firing
             GameObject firedProjectile = Instantiate(snowBall, player.transform.position, rotation) as GameObject;
             firedProjectile.GetComponent<Projectile>().destination = mousePos;
             firedProjectile.GetComponent<Projectile>().speed = snowballSpeed;
